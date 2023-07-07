@@ -4,13 +4,18 @@ import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 public class ComentarioDTO {
 
     private int id_comentario;
 
+    @NotEmpty
+    @Size(min=3,message = "El nombre debe tener almenos 3 Caracteres")
     private String nombre;
-
+    @NotEmpty
+    @Size(min=5,message = "El cuerpo debe tener almenos 5 Caracteres")
     private String cuerpo;
 
     public ComentarioDTO() {

@@ -2,6 +2,7 @@ package com.sistema.blog.spring.controller;
 
 import com.sistema.blog.spring.dto.PublicacionDTO;
 import com.sistema.blog.spring.service.PublicacionService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -17,8 +18,9 @@ public class PublicionRestController {
     @Autowired
     private PublicacionService publicacionService;
 
+
     @PostMapping
-    public ResponseEntity<PublicacionDTO> guardarPublicacion(@RequestBody PublicacionDTO publicacionDTO){
+    public ResponseEntity<PublicacionDTO> guardarPublicacion(@Valid @RequestBody PublicacionDTO publicacionDTO){
         return new ResponseEntity<>(publicacionService.insertar(publicacionDTO), HttpStatus.CREATED);
     }
 
@@ -33,7 +35,7 @@ public class PublicionRestController {
     }
 
     @PutMapping
-    public ResponseEntity<PublicacionDTO> actualizarPublicacion(@RequestBody PublicacionDTO publicacionDTO){
+    public ResponseEntity<PublicacionDTO> actualizarPublicacion(@Valid @RequestBody PublicacionDTO publicacionDTO){
         return new ResponseEntity<>(publicacionService.actualizar(publicacionDTO),HttpStatus.CREATED);
     }
 
