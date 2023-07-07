@@ -8,6 +8,7 @@ import com.sistema.blog.spring.modelo.Publicacion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.awt.print.Pageable;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
@@ -33,7 +34,6 @@ public class PublicacionService implements IPublicacionService {
     @Override
     public ArrayList<PublicacionDTO> listar() {
         ArrayList<Publicacion> listaPublicaciones = (ArrayList<Publicacion>) iPublicacionRepository.findAll();
-        PublicacionDTO publicacionDTO = new PublicacionDTO();
         return (ArrayList<PublicacionDTO>) listaPublicaciones.stream().map(publicacion-> this.publicacionToDto(publicacion)).collect(Collectors.toList());
     }
 
@@ -49,7 +49,6 @@ public class PublicacionService implements IPublicacionService {
 
         publicacion.setTitulo(publicacionDTO.getTitulo());
         publicacion.setDescripcion(publicacionDTO.getDescripcion());
-        publicacion.setContenido(publicacionDTO.getContenido());
 
         Publicacion publicacionActualizada = iPublicacionRepository.save(publicacion);
 
@@ -68,7 +67,6 @@ public class PublicacionService implements IPublicacionService {
         publicacionDto.setId(publicacion.getId());
         publicacionDto.setTitulo(publicacion.getTitulo());
         publicacionDto.setDescripcion(publicacion.getDescripcion());
-        publicacionDto.setContenido(publicacion.getContenido());
         return publicacionDto;
     }
 
@@ -77,7 +75,6 @@ public class PublicacionService implements IPublicacionService {
         publicacion.setId(publicacionDTO.getId());
         publicacion.setTitulo(publicacionDTO.getTitulo());
         publicacion.setDescripcion(publicacionDTO.getDescripcion());
-        publicacion.setContenido(publicacionDTO.getContenido());
         return publicacion;
     }
 

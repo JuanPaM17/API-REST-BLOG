@@ -11,14 +11,11 @@ public class PublicacionDTO {
     private int id_publicacion;
     private String titulo;
     private String descripcion;
-    @Column(name="contenido", nullable = false)
-    private String contenido;
 
-    public PublicacionDTO(int id, String titulo, String descripcion, String contenido) {
+    public PublicacionDTO(int id, String titulo, String descripcion) {
         this.id_publicacion = id;
         this.titulo = titulo;
         this.descripcion = descripcion;
-        this.contenido = contenido;
     }
 
     public PublicacionDTO() {
@@ -47,21 +44,12 @@ public class PublicacionDTO {
         this.descripcion = descripcion;
     }
 
-    public String getContenido() {
-        return contenido;
-    }
-
-    public void setContenido(String contenido) {
-        this.contenido = contenido;
-    }
-
     @Override
     public String toString() {
         return "Publicacion{" +
                 "id=" + id_publicacion +
                 ", titulo='" + titulo + '\'' +
                 ", descripcion='" + descripcion + '\'' +
-                ", contenido='" + contenido + '\'' +
                 '}';
     }
 }

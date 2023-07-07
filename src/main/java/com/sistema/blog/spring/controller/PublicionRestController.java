@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
 @RestController
-@RequestMapping("/api/publiciones")
+@RequestMapping("/api/publicaciones")
 public class PublicionRestController {
 
     @Autowired
