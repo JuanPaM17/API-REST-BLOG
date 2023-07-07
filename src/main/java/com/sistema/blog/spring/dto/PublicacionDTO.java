@@ -1,10 +1,13 @@
 package com.sistema.blog.spring.dto;
 
+import com.sistema.blog.spring.modelo.Comentario;
 import com.sistema.blog.spring.modelo.Publicacion;
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+
+import java.util.Set;
 
 public class PublicacionDTO {
 
@@ -12,10 +15,20 @@ public class PublicacionDTO {
     private String titulo;
     private String descripcion;
 
+    private Set<Comentario> comentarios;
+
     public PublicacionDTO(int id, String titulo, String descripcion) {
         this.id_publicacion = id;
         this.titulo = titulo;
         this.descripcion = descripcion;
+    }
+
+    public Set<Comentario> getComentarios() {
+        return comentarios;
+    }
+
+    public void setComentarios(Set<Comentario> comentarios) {
+        this.comentarios = comentarios;
     }
 
     public PublicacionDTO() {

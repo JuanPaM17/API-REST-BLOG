@@ -5,6 +5,7 @@ import com.sistema.blog.spring.excepciones.ResourcesNotFoundExcepcion;
 import com.sistema.blog.spring.interfazRepository.IPublicacionRepository;
 import com.sistema.blog.spring.interfazService.IPublicacionService;
 import com.sistema.blog.spring.modelo.Publicacion;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,9 @@ import java.util.stream.Collectors;
 
 @Service
 public class PublicacionService implements IPublicacionService {
+
+    @Autowired
+    private ModelMapper modelMapper;
 
     @Autowired
     private IPublicacionRepository iPublicacionRepository;
@@ -63,18 +67,12 @@ public class PublicacionService implements IPublicacionService {
 
 
     public PublicacionDTO publicacionToDto(Publicacion publicacion) {
-        PublicacionDTO publicacionDto = new PublicacionDTO();
-        publicacionDto.setId(publicacion.getId());
-        publicacionDto.setTitulo(publicacion.getTitulo());
-        publicacionDto.setDescripcion(publicacion.getDescripcion());
+        PublicacionDTO publicacionDto = modelMapper.map(publicacion,PublicacionDTO.class);
         return publicacionDto;
     }
 
     public Publicacion dtoToPublicacion(PublicacionDTO publicacionDTO) {
-        Publicacion publicacion = new Publicacion();
-        publicacion.setId(publicacionDTO.getId());
-        publicacion.setTitulo(publicacionDTO.getTitulo());
-        publicacion.setDescripcion(publicacionDTO.getDescripcion());
+        Publicacion publicacion = modelMapper.map(publicacionDTO,Publicacion.class);
         return publicacion;
     }
 

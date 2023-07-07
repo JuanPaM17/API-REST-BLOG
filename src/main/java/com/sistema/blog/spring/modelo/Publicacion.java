@@ -1,5 +1,6 @@
 package com.sistema.blog.spring.modelo;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.sistema.blog.spring.dto.PublicacionDTO;
 import jakarta.persistence.*;
 
@@ -20,6 +21,7 @@ public class Publicacion {
     @Column(name="descripcion", nullable = false)
     private String descripcion;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "publicacion",cascade = CascadeType.ALL,orphanRemoval = true)
     private Set<Comentario> comentarios = new HashSet<>();
 
@@ -38,6 +40,14 @@ public class Publicacion {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Set<Comentario> getComentarios() {
+        return comentarios;
+    }
+
+    public void setComentarios(Set<Comentario> comentarios) {
+        this.comentarios = comentarios;
     }
 
     public String getTitulo() {

@@ -8,6 +8,7 @@ import com.sistema.blog.spring.interfazRepository.IPublicacionRepository;
 import com.sistema.blog.spring.interfazService.IComentarioSevice;
 import com.sistema.blog.spring.modelo.Comentario;
 import com.sistema.blog.spring.modelo.Publicacion;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,8 @@ import java.util.stream.Collectors;
 @Service
 public class ComentarioService implements IComentarioSevice {
 
+    @Autowired
+    private ModelMapper modelMapper;
 
     @Autowired
     private IPublicacionRepository iPublicacionRepository;
@@ -74,18 +77,12 @@ public class ComentarioService implements IComentarioSevice {
 
 
     private ComentarioDTO mapearDTO(Comentario comentario){
-        ComentarioDTO comentarioDTO = new ComentarioDTO();
-        comentarioDTO.setId_comentario(comentario.getId_comentario());
-        comentarioDTO.setNombre(comentario.getNombre());
-        comentarioDTO.setCuerpo(comentario.getCuerpo());
+        ComentarioDTO comentarioDTO = modelMapper.map(comentario,ComentarioDTO.class);
         return comentarioDTO;
     }
 
     private Comentario mapearComentario(ComentarioDTO ComentarioDTO){
-        Comentario Comentario = new Comentario();
-        Comentario.setId_comentario(ComentarioDTO.getId_comentario());
-        Comentario.setNombre(ComentarioDTO.getNombre());
-        Comentario.setCuerpo(ComentarioDTO.getCuerpo());
+        Comentario Comentario = modelMapper.map(ComentarioDTO,Comentario.class);
         return Comentario;
     }
 }
